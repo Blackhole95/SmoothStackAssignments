@@ -30,6 +30,7 @@ public class Catalog {
 		bookList = Catalog.getBooks();
 		authorList = Catalog.getAuthors();
 		publisherList = Catalog.getPublishers();
+		//Exit if there was a problem loading files
 		if(bookList == null || authorList == null || publisherList == null)
 			return;
 		//Main Menu
@@ -47,6 +48,7 @@ public class Catalog {
 					//Check if input is an integer
 					response = in.nextLine();
 					option = Integer.parseInt(response);
+					//Make decision
 					switch(option) {
 						case 1:
 							nextMenu = true;
@@ -191,6 +193,7 @@ public class Catalog {
 				}
 			}
 		}
+		//Save data and exit
 		Catalog.setBooks(bookList);
 		Catalog.setAuthors(authorList);
 		Catalog.setPublishers(publisherList);
@@ -206,8 +209,10 @@ public class Catalog {
 		file = new File("data/book.txt");
 		try {
 			if(file.createNewFile()) {
+				//No file to read to read from
 				return new ArrayList<CatalogEntity>();
 			} else {
+				//Each item recorded as line of text in text file
 				entries = new ArrayList<String>();
 				try(BufferedReader bufferedReader = new BufferedReader(new FileReader("data/book.txt"))) {
 					while((line = bufferedReader.readLine()) != null) {
@@ -215,8 +220,10 @@ public class Catalog {
 					}
 				}
 				if(entries.isEmpty()) {
+					//No lines to read from
 					return new ArrayList<CatalogEntity>();
 				} else {
+					//Create and add items from data
 					bookList = new ArrayList<CatalogEntity>();
 					for(String entry : entries) {
 						data = entry.split(",");
@@ -226,12 +233,14 @@ public class Catalog {
 				}
 			}
 		} catch (IOException e) {
+			//Shouldn't get here
 			System.out.println("Something went wrong.");;
 		}
 		return null;
 	}
 	
 	//Load authors from text file if it exists, else return empty list
+	//TODO: Combine with getBooks
 	private static List<CatalogEntity> getAuthors() {
 		ArrayList<CatalogEntity> authorList;
 		ArrayList<String> entries;
@@ -267,6 +276,7 @@ public class Catalog {
 	}
 	
 	//Load publishers from text file if it exists, else return empty list
+	//TODO: Combine with getBooks
 	private static List<CatalogEntity> getPublishers() {
 		ArrayList<CatalogEntity> publisherList;
 		ArrayList<String> entries;
@@ -307,8 +317,10 @@ public class Catalog {
 		File file;
 		file = new File("data/book.txt");
 		try {
+			//Replace previous file
 			file.delete();
 			file.createNewFile();
+			//Store each item as line of data, fields separated by commas
 			try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("data/book.txt"))) {
 				for(CatalogEntity item : bookList) {
 					book = (Book)item;
@@ -321,6 +333,7 @@ public class Catalog {
 	}
 	
 	//Store author list in text file memory
+	//TODO: Combine with setBooks
 	private static void setAuthors(List<CatalogEntity> authorList) {
 		Author author;
 		File file;
@@ -340,6 +353,7 @@ public class Catalog {
 	}
 	
 	//Store publisher list in text file memory
+	//TODO: Combine with setBooks
 	private static void setPublishers(List<CatalogEntity> publisherList) {
 		Publisher publisher;
 		File file;
@@ -372,16 +386,18 @@ public class Catalog {
 		String author;
 		String publisher;
 		String address;
+		//Query for book information
 		System.out.println("Enter Book Name:");
 		book = in.nextLine();
 		System.out.println("Enter Author Name:");
 		author = in.nextLine();
 		System.out.println("Enter Publisher Name:");
 		publisher = in.nextLine();
+		//TODO: Query address only after existence of publisher has been checked
 		System.out.println("Enter Publisher Address:");
 		address = in.nextLine();
 		//Create Author
-		authorFilter = authorList.stream().filter(e -> e.getName().equalsIgnoreCase(author)).collect(Collectors.toList());
+		authorFilter = authorList.stream().filter(item -> item.getName().equalsIgnoreCase(author)).collect(Collectors.toList());
 		if(authorFilter.isEmpty()) {
 			if(authorList.isEmpty())
 				authorID = 1;
@@ -392,8 +408,8 @@ public class Catalog {
 			authorID = authorFilter.get(0).getID();
 		}
 		//Create Publisher
-		publisherFilter = publisherList.stream().filter(e -> e.getName().equalsIgnoreCase(publisher)).collect(Collectors.toList());
-		publisherFilter = publisherList.stream().filter(e -> ((Publisher)e).getAddress().equalsIgnoreCase(address)).collect(Collectors.toList());
+		publisherFilter = publisherList.stream().filter(item -> item.getName().equalsIgnoreCase(publisher)).collect(Collectors.toList());
+		publisherFilter = publisherList.stream().filter(item -> ((Publisher)item).getAddress().equalsIgnoreCase(address)).collect(Collectors.toList());
 		if(publisherFilter.isEmpty()) {
 			if(publisherList.isEmpty())
 				publisherID = 1;
@@ -404,9 +420,9 @@ public class Catalog {
 			publisherID = publisherFilter.get(0).getID();
 		}
 		//Create Book
-		bookFilter = bookList.stream().filter(e -> e.getName().equalsIgnoreCase(book)).collect(Collectors.toList());
-		bookFilter = bookList.stream().filter(e -> ((Book)e).getAuthorID() == authorID).collect(Collectors.toList());
-		bookFilter = bookList.stream().filter(e -> ((Book)e).getPublisherID() == publisherID).collect(Collectors.toList());
+		bookFilter = bookList.stream().filter(item -> item.getName().equalsIgnoreCase(book)).collect(Collectors.toList());
+		bookFilter = bookList.stream().filter(item -> ((Book)item).getAuthorID() == authorID).collect(Collectors.toList());
+		bookFilter = bookList.stream().filter(item -> ((Book)item).getPublisherID() == publisherID).collect(Collectors.toList());
 		if(bookFilter.isEmpty()) {
 			if(bookList.isEmpty())
 				bookID = 1;
@@ -435,8 +451,8 @@ public class Catalog {
 		if(filter.isEmpty()) {
 			System.out.println("I'm sorry, that book does not exist in the system.");
 		} else {
-			for(CatalogEntity e : filter) {
-				System.out.println(e.toString());
+			for(CatalogEntity item : filter) {
+				System.out.println(item.toString());
 			}
 		}
 	}

@@ -1,5 +1,6 @@
-package Week1Day2;
-// Brendan Raymond
+package com.ss.assignment2;
+
+//Brendan Raymond
 public class ArrayMax {
 	
 	public static void main(String[] args) {

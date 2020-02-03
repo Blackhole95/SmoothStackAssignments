@@ -1,8 +1,7 @@
-package Week1Day2;
+package com.ss.assignment2;
 import java.util.Scanner;
 
-// Brendan Raymond
-
+//Brendan Raymond
 public class ScannerSum {
 	
 	public static void main(String[] args) {

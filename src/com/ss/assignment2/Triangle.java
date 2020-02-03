@@ -1,6 +1,6 @@
-package Week1Day2;
-// Brendan Raymond
+package com.ss.assignment2;
 
+//Brendan Raymond
 public class Triangle implements Shape {
 	
 	private int base;

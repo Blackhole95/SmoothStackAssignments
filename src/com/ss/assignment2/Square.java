@@ -1,6 +1,6 @@
-package Week1Day2;
-// Brendan Raymond
+package com.ss.assignment2;
 
+//Brendan Raymond
 public class Square implements Shape{
 	
 	private int length;

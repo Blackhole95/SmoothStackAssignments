@@ -1,6 +1,6 @@
-package Week1Day1;
+package com.ss.assignment1;
 
-
+//Brendan Raymond
 public class Pattern {
 
 	//Main Method

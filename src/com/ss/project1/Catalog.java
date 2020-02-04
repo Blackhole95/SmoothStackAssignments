@@ -409,7 +409,7 @@ public class Catalog {
 		}
 		//Create Publisher
 		publisherFilter = publisherList.stream().filter(item -> item.getName().equalsIgnoreCase(publisher)).collect(Collectors.toList());
-		publisherFilter = publisherList.stream().filter(item -> ((Publisher)item).getAddress().equalsIgnoreCase(address)).collect(Collectors.toList());
+		publisherFilter = publisherFilter.stream().filter(item -> ((Publisher)item).getAddress().equalsIgnoreCase(address)).collect(Collectors.toList());
 		if(publisherFilter.isEmpty()) {
 			if(publisherList.isEmpty())
 				publisherID = 1;
@@ -421,8 +421,8 @@ public class Catalog {
 		}
 		//Create Book
 		bookFilter = bookList.stream().filter(item -> item.getName().equalsIgnoreCase(book)).collect(Collectors.toList());
-		bookFilter = bookList.stream().filter(item -> ((Book)item).getAuthorID() == authorID).collect(Collectors.toList());
-		bookFilter = bookList.stream().filter(item -> ((Book)item).getPublisherID() == publisherID).collect(Collectors.toList());
+		bookFilter = bookFilter.stream().filter(item -> ((Book)item).getAuthorID() == authorID).collect(Collectors.toList());
+		bookFilter = bookFilter.stream().filter(item -> ((Book)item).getPublisherID() == publisherID).collect(Collectors.toList());
 		if(bookFilter.isEmpty()) {
 			if(bookList.isEmpty())
 				bookID = 1;

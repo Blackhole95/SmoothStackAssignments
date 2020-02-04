@@ -6,12 +6,14 @@ import java.util.List;
 public class LambdaDemo {
 	
 	public static void main(String[] args) {
+		//stringList.stream().sorted((a, b) -> a.length() - b.length()).forEach(System.out::println);
 		System.out.println("1) Basic Lambdas:");
-		List<String> stringList = Arrays.asList("Andrew", "Max", "David", "Sylvester", "Alexander", "Luke Skywalker", "J");
+		String[] org = {"Andrew", "Max", "David", "Sylvester", "Alexander", "Luke Skywalker", "J"};
 		System.out.println("Original List:");
-		stringList.stream().forEach(System.out::println);
+		for(String s : org)
+			System.out.println(s);
 		System.out.println("Sorted by Length:");
-		stringList.stream().sorted((a, b) -> a.length() - b.length()).forEach(System.out::println);
+			
 		System.out.println("Sorted by Reverse Length:");
 		
 		System.out.println("Sorted Alphabetically by First Character Only:");

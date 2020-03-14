@@ -2,10 +2,14 @@ package com.ss.project1;
 
 //Brendan Raymond
 //Data representation of Author
-class Author extends CatalogEntity {
+class Author extends Item {
 	
-	Author(int id, String name) {
+	public Author(int id, String name) {
 		super(id, name);
+	}
+	
+	public Author(String[] data) {
+		super(data);
 	}
 	
 	@Override

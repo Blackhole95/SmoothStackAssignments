@@ -2,31 +2,36 @@ package com.ss.project1;
 
 //Brendan Raymond
 //Data representation of Book
-class Book extends CatalogEntity {
+class Book extends Item {
 	
-	//Must be able to link to Author and Publisher of Book
 	private int authorID;
 	private int publisherID;
 	
-	Book(int id, String name, int authorID, int publisherID) {
+	public Book(int id, String name, int authorID, int publisherID) {
 		super(id, name);
 		this.authorID = authorID;
 		this.publisherID = publisherID;
 	}
 	
-	int getAuthorID() {
+	public Book(String[] data) {
+		super(data);
+		this.authorID = Integer.parseInt(data[2]);
+		this.publisherID = Integer.parseInt(data[3]);
+	}
+	
+	public int getAuthorID() {
 		return this.authorID;
 	}
 	
-	int getPublisherID() {
+	public int getPublisherID() {
 		return this.publisherID;
 	}
 	
-	void setAuthorID(int authorID) {
+	public void setAuthorID(int authorID) {
 		this.authorID = authorID;
 	}
 	
-	void setPublisherID(int publisherID) {
+	public void setPublisherID(int publisherID) {
 		this.publisherID = publisherID;
 	}
 	

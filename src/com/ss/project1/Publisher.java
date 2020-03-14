@@ -2,21 +2,25 @@ package com.ss.project1;
 
 //Brendan Raymond
 //Data representation of Author
-class Publisher extends CatalogEntity {
+class Publisher extends Item {
 	
-	//Must be able to find Publisher in real world
 	private String address;
 	
-	Publisher(int id, String name, String address) {
+	public Publisher(int id, String name, String address) {
 		super(id, name);
 		this.address = address;
 	}
 	
-	String getAddress() {
+	public Publisher(String[] data) {
+		super(data);
+		this.address = data[3];
+	}
+	
+	public String getAddress() {
 		return this.address;
 	}
 	
-	void setAddress(String address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 	
